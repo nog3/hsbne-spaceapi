@@ -4,7 +4,7 @@ levelup = require("levelup"),
 port = process.env.OPENSHIFT_NODEJS_PORT || 8080,
 ip = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
     
-var spacejson = "{
+var spacejson = [{
     "api": "0.12",
     "space": "HSBNE",
     "logo": "http://hsbne.org/assets/img/headerlogo.png",
@@ -26,7 +26,7 @@ var spacejson = "{
     "open": false,
     "status": "closed",
     "lastchange": 1386524299
-}"
+}];
 
 http.createServer(function(request,response){  
     var path = url.parse(request.url).pathname;  
