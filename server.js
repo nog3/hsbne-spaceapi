@@ -1,12 +1,38 @@
-
-http = require("http"),  
+var http = require("http"),  
 url = require("url"),  
+levelup = require("levelup"),  
+port = process.env.OPENSHIFT_NODEJS_PORT || 8080,
+ip = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
+    
+var spacejson = "{
+    "api": "0.12",
+    "space": "HSBNE",
+    "logo": "http://hsbne.org/assets/img/headerlogo.png",
+    "icon": {
+        "open": "http://hsbne.org/assets/img/headerlogo.png",
+        "closed": "http://hsbne.org/assets/img/headerlogo.png"
+    },
+    "url": "http://hsbne.org/",
+    "address": "217 Macarthur Avenue, Eagle Farm QLD 4009",
+    "contact": {
+        "email": "contact@hsbne.org",
+        "irc": "irc://freenode/hsbne",
+        "ml": "hackerspace_brisbane@googlegroups.com",
+        "twitter": "@HSBNE"
+    },
+    
+    "lat": -27.45493,
+    "lon": 153.050181,
+    "open": false,
+    "status": "closed",
+    "lastchange": 1386524299
+}"
 
 http.createServer(function(request,response){  
     var path = url.parse(request.url).pathname;  
     if (path === "/json") {
-        response.writeHead(200, { "Content-Type": "text/plain" });
-        response.write("JSON goes here yay!\n");
+        response.writeHead(200, { "Content-Type": "application/json" });
+        response.write(spacejson);
         response.end();
     }
     else {
@@ -14,5 +40,5 @@ http.createServer(function(request,response){
         response.write("404 Not Found\n");
         response.end();
     }
-}).listen(8080);  
-console.log("Server Running on 8080"); 
+}).listen(port, ip);  
+console.log("Server Running on " + port); 
