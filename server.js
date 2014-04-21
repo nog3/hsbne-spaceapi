@@ -1,8 +1,7 @@
 var http = require("http"),  
 url = require("url"),  
 levelup = require("levelup"),  
-port = process.env.OPENSHIFT_NODEJS_PORT || 8080,
-ip = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
+port = 80,
     
 var spaceInfo = {
     api: "0.12",
@@ -39,8 +38,8 @@ http.createServer(function(request,response){
     }
     else {
         response.writeHead(404, { "Content-Type": "text/plain" });
-        response.write("404 Not Found\n");
+        response.write("go to /json you dummy\n");
         response.end();
     }
-}).listen(port, ip);  
+}).listen(port);  
 console.log("Server Running on " + port); 
