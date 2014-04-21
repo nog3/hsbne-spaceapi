@@ -1,7 +1,7 @@
 var http = require("http"),  
 url = require("url"),  
 levelup = require("levelup"),  
-port = 80,
+port = 80;
     
 var spaceInfo = {
     api: "0.12",
