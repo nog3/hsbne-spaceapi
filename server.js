@@ -1,8 +1,8 @@
-var http = require("http"),  
-url = require("url"),  
-levelup = require("levelup"),  
+var http = require("http"),
+url = require("url"),
+levelup = require("levelup"),
 port = 80;
-    
+
 var spaceInfo = {
     api: "0.12",
     space: "HSBNE",
@@ -19,20 +19,25 @@ var spaceInfo = {
         ml: "hackerspace_brisbane@googlegroups.com",
         twitter: "@HSBNE"
     },
-    
+
     lat: -27.45493,
     lon: 153.050181,
     open: false,
     status: "closed",
     lastchange: 1386524299
+    cache: {
+        schedule: "d.01"
+    }
 };
 
 var spaceJson = JSON.stringify(spaceInfo);
 
-http.createServer(function(request,response){  
-    var path = url.parse(request.url).pathname;  
+http.createServer(function(request,response){
+    var path = url.parse(request.url).pathname;
     if (path === "/json") {
-        response.writeHead(200, { "Content-Type": "application/json" });
+        response.writehead(200, {"Access-Control-Allow-Origin": "*"});
+        response.writehead(200, {"Cache-Control": "no-cache")};
+        response.writeHead(200, {"Content-Type": "application/json"});
         response.write(spaceJson);
         response.end();
     }
@@ -41,5 +46,5 @@ http.createServer(function(request,response){
         response.write("go to /json you dummy\n");
         response.end();
     }
-}).listen(port);  
-console.log("Server Running on " + port); 
+}).listen(port);
+console.log("Server Running on " + port);
